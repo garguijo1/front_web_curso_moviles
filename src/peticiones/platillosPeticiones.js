@@ -22,7 +22,7 @@ class platillosPeticiones{
             }else { console.log('error en la peticion');}
         })
         .then(res=>{
-            respuesta = res
+            respuesta = res.datos
             console.log(res);
         })
         .catch(err =>{
@@ -39,7 +39,7 @@ class platillosPeticiones{
             }else { console.log('error en la peticion');}
         })
         .then(res=>{
-            respuesta = res
+            respuesta = res.datos
             console.log(res);
         })
         .catch(err =>{
@@ -50,7 +50,7 @@ class platillosPeticiones{
 
     create = async (data)=>{
         let respuesta;
-        await axios.post(`${process.env.REACT_APP_API_URL}/v1/platillos/add`,{
+        await axios.post(`${process.env.REACT_APP_API_URL}/v1/platillos/crear`,{
             accion : 4,
             nombre: data.nombre,
             descripcion: data.descripcion,
@@ -72,7 +72,7 @@ class platillosPeticiones{
 
     update = async (data,id) =>{
         let respuesta;
-        await axios.put(`${process.env.REACT_APP_API_URL}/v1/platillos/${id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/v1/platillos/modificar/${id}`, {
             accion : 6,
             nombre: data.nombre,
             descripcion: data.descripcion,

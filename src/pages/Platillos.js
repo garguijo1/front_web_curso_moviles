@@ -114,10 +114,7 @@ class Platillos extends React.Component {
                     c.setAttribute('selected',true)
                 }
             })
-
         }
-        
-        
     }
 
     gestionarBoton = async ()=>{
@@ -143,15 +140,9 @@ class Platillos extends React.Component {
 
     actualizarPlatillo = async (id,platillo) =>{
         let resultado = await peticiones.update(platillo,id);
-        let mensaje = ""
-        if(resultado){
-            mensaje = "platillo actualizado exitosamente";
-        }else{
-            mensaje = "error en la actulizacion del platillo";
-            
-        }
 
-        document.getElementById('text_mensaje').textContent=mensaje;
+
+        document.getElementById('text_mensaje').textContent=resultado.mensaje;
         setTimeout(()=>{
             document.getElementById('text_mensaje').textContent="";
         },4000)
@@ -159,8 +150,7 @@ class Platillos extends React.Component {
 
     guardarPlatillo = async (platillo)=>{
         let resultado = await peticiones.create(platillo);
-        let mensaje = ""
-        if(resultado.data){
+        if(resultado.estado){
             this.setState({
                 card: {
                     nombre: 'Nombre del platillo',
@@ -170,17 +160,21 @@ class Platillos extends React.Component {
                     base_64: ""
                 }
             });
-            mensaje = "platillo creado exitosamente";
-        }else{
-            mensaje = "error en la creacion del platillo";
-            
+            this.limpiarCasillas();
         }
 
-        document.getElementById('text_mensaje').textContent=mensaje;
+        document.getElementById('text_mensaje').textContent=resultado.mensaje;
         setTimeout(()=>{
             document.getElementById('text_mensaje').textContent="";
         },4000)
     
+    }
+
+    limpiarCasillas = () =>{
+        document.getElementById('plat-nombre').value = ""
+        document.getElementById('plat-precio').value = ""
+        document.getElementById('plat-desc').value = ""
+        document.getElementById("plat-categoria").selectedIndex = "0";
     }
 
     async componentDidMount() {

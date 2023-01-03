@@ -22,11 +22,11 @@ class Login extends React.Component{
         const user= document.getElementById('lg_user').value;
         const pass= document.getElementById('lg_pass').value;
         console.log(user,pass);
-        await peticiones.login(user,pass);
+        let mensaje = await peticiones.login(user,pass);
         if(cookies.get('id')){
             window.location.href = './inicio';
         }else{
-            console.log("sin id");
+            document.getElementById('text_mensaje').textContent = mensaje;
         }
        
     }

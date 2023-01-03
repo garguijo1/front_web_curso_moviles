@@ -15,6 +15,7 @@ class usuariosPeticiones{
     }
 
     login = async (user,pass) =>{
+        let mensaje = "";
         await axios.post(`${process.env.REACT_APP_API_URL}/v1/usuarios/login`,{
             usuario : user,
             pass: pass
@@ -27,21 +28,21 @@ class usuariosPeticiones{
             }
         })
         .then(res=>{
-            console.log(res.data);
-            if (res.data) {
-                console.log("informacion: ",res.data);            
-                cookies.set('id',res.data.id_usuario,{path:'/'});
-                cookies.set('nombre',res.data.nombre,{path:'/'});
-                cookies.set('rol',res.data.id_rol,{path:'/'});
-                cookies.set('sede',res.data.id_sede,{path:'/'});
-                cookies.set('token',res.data.token,{path:'/'});
-            }else {
-                console.log('usuario o contraseña incorrecta');
+            console.log(res.datos);
+            mensaje = res.mensaje;
+            if (res.datos.id_usuario) {
+                // console.log("informacion: ",res.data);            
+                cookies.set('id',res.datos.id_usuario,{path:'/'});
+                cookies.set('nombre',res.datos.nombre,{path:'/'});
+                cookies.set('rol',res.datos.id_rol,{path:'/'});
+                cookies.set('sede',res.datos.id_sede,{path:'/'});
+                cookies.set('token',res.datos.token,{path:'/'});
             }
         })
         .catch(err =>{
             console.log(err);
         })
+        return mensaje;
     }
 
     deslogin = async (id)=>{

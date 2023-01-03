@@ -2,6 +2,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
+import LineChart from "../components/LineChart";
 
 const cookies = new Cookies();
 
@@ -24,6 +25,7 @@ class EstReservas extends React.Component {
                 <h1>
                     HOLA DESDE LAS ESTADISTICAS DE RESERVACIONES
                 </h1>
+                <LineChart />
             </div>
         );
     }
