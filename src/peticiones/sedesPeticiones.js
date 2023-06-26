@@ -22,7 +22,7 @@ class sedesPeticiones{
             }else { console.log('error en la peticion');}
         })
         .then(res=>{
-            informacion = res;
+            informacion = res.datos;
         })
         .catch(err =>{
             console.log(err);
